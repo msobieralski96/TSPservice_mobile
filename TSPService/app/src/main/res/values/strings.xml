@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Kurier w drodze (TSP Service)</string>
+    <string-array name="state_of_delivery_array">
+        <item>Przesyłka zarejestrowana w systemie</item>
+        <item>Odebrana od nadawcy</item>
+        <item>W magazynie</item>
+        <item>Przygotowana do nadania</item>
+        <item>W trasie</item>
+        <item>W sortowni</item>
+        <item>W oddziale docelowym</item>
+        <item>W drodze do klienta</item>
+        <item>Doręczona</item>
+        <item>Awizo</item>
+        <item>Zwrócona do nadawcy</item>
+        <item>Inny</item>
+    </string-array>
+</resources>

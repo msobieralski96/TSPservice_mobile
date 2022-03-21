@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".TSPPrepareActivity">
+
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dimBackgroundColor"
+        android:elevation="2dp"
+        android:visibility="gone"
+        android:gravity="center">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:elevation="10dp"
+            android:indeterminate="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/helpPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dimBackgroundColor"
+        android:elevation="2dp"
+        android:visibility="gone"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/credits"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Powered by: Service © openrouteservice.org | Map data © OpenStreetMap contributors"
+                android:background="@android:color/white"
+                android:gravity="center"/>
+            <TextView
+                android:id="@+id/tip0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" "
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:layout_below="@+id/credits"/>
+            <TextView
+                android:id="@+id/tip1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="W celu wyznaczenia trasy:"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:layout_below="@+id/tip0"/>
+            <TextView
+                android:id="@+id/tip2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" - Wybierz datę."
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:layout_below="@+id/tip1"/>
+            <TextView
+                android:id="@+id/tip3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" - Opcjonalnie wybierz lokalizację aktualną przesyłki."
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:layout_below="@+id/tip2"/>
+            <TextView
+                android:id="@+id/tip4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" - Zanzacz wybrane adresy w kolumnie 'Wybierz'."
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:layout_below="@+id/tip3"/>
+            <TextView
+                android:id="@+id/tip5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" - Wyznacz pierwszy/ostatni punkt w kolumnie 'Pierwszy'."
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:layout_below="@+id/tip4"/>
+            <TextView
+                android:id="@+id/tip6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" - Wybierz rodzaj odległości między dwoma punktami:"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:layout_below="@+id/tip5"/>
+            <TextView
+                android:id="@+id/tip7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" * linie proste (szybciej, max 60 adresów);"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:layout_below="@+id/tip6"/>
+            <TextView
+                android:id="@+id/tip8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" * na podstawie dróg (dokładniej, max 12 adresów)."
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:layout_below="@+id/tip7"/>
+            <TextView
+                android:id="@+id/tip9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" - Jeśli wybrano odległości z uwzględnieniem dróg - wybierz kryterium wyszukiwania (względem dystansu/czasu)."
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:layout_below="@+id/tip8"/>
+            <TextView
+                android:id="@+id/tip10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" - Zaznacz przycisk 'Znajdź trasę' i poczekaj od kilkunastu sekund do kilku minut na wyniki."
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:layout_below="@+id/tip9"/>
+            <Button
+                android:id="@+id/tip_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ukryj"
+                android:gravity="center"
+                android:layout_below="@+id/tip10"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@color/colorPrimary"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentTop = "true">
+            <LinearLayout
+                android:id="@+id/layout_search_by_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/edit_text_date"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/edit_text_current_address"
+                    android:ems="3"
+                    android:hint="Podaj datę (yyyy-MM-dd)"/>
+                <Button
+                    android:id="@+id/button_search_by_date"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:text="Zatwierdź"
+                    android:textColor="@android:color/white"
+                    android:backgroundTint="@color/colorPrimary" />
+            </LinearLayout>
+
+            <Spinner
+                android:id="@+id/spinner_current_location"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/layout_search_by_date"
+                android:ems="3"
+                android:hint="Wybierz lokalizację aktualną"/>
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/scroll_table"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scrollbars="vertical"
+            android:layout_weight="1">
+            <HorizontalScrollView
+                android:id="@+id/scroll_table_h"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+                <LinearLayout
+                    android:layout_width="1200dp"
+                    android:layout_height="wrap_content">
+                    <TableLayout
+                        android:id="@+id/table_parcels"
+                        android:layout_width="1200dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TableRow
+                            android:id="@+id/table_parcels_header">
+                            <Button
+                                android:id="@+id/button_parcel_sort_by_id"
+                                android:text="SSCC"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight=".18"
+                                android:backgroundTint="@color/colorPrimary"
+                                android:textColor="#ffffff"/>
+                            <Button
+                                android:id="@+id/button_parcel_sort_by_address_type"
+                                android:text="Typ adresu"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight=".12"
+                                android:backgroundTint="@color/colorPrimary"
+                                android:textColor="#ffffff"/>
+                            <Button
+                                android:id="@+id/button_parcel_sort_by_address"
+                                android:text="Adres"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight=".24"
+                                android:backgroundTint="@color/colorPrimary"
+                                android:textColor="#ffffff"/>
+                            <Button
+                                android:id="@+id/button_parcel_sort_by_cur_loc"
+                                android:text="Lokalizacja aktualna"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight=".24"
+                                android:backgroundTint="@color/colorPrimary"
+                                android:textColor="#ffffff"/>
+                            <Button
+                                android:id="@+id/button_parcel_sort_by_date"
+                                android:text="Data"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight=".12"
+                                android:backgroundTint="@color/colorPrimary"
+                                android:textColor="#ffffff"/>
+                            <Button
+                                android:id="@+id/button_parcel_sort_by_state"
+                                android:text="Status"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight=".12"
+                                android:backgroundTint="@color/colorPrimary"
+                                android:textColor="#ffffff"/>
+                            <Button
+                                android:id="@+id/text_view_choose"
+                                android:text="Wybierz"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight=".06"
+                                android:backgroundTint="@color/colorPrimary"
+                                android:textColor="#ffffff"
+                                android:clickable="false"/>
+                            <Button
+                                android:id="@+id/text_view_first"
+                                android:text="Pierwszy"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight=".06"
+                                android:backgroundTint="@color/colorPrimary"
+                                android:textColor="#ffffff"
+                                android:clickable="false"/>
+                        </TableRow>
+                    </TableLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/top_layout_for_actions"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom = "true">
+            <RadioButton
+                android:id="@+id/radio_straight_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="W linii prostej"
+                android:textColor="@android:color/white"/>
+            <RadioButton
+                android:id="@+id/radio_road_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Na podstawie dróg"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/bottom_layout_for_actions"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom = "true">
+            <RadioButton
+                android:id="@+id/radio_by_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dystans"
+                android:textColor="@android:color/white"/>
+            <RadioButton
+                android:id="@+id/radio_by_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Czas"
+                android:textColor="@android:color/white"/>
+            <Button
+                android:id="@+id/button_resolve_tsp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:text="Znajdź trasę"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@color/colorPrimary"/>
+            <Button
+                android:id="@+id/button_info"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:textAllCaps="false"
+                android:layout_weight="0.1"
+                android:text="i"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@color/colorPrimary"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
